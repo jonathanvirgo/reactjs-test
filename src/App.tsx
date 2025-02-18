@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import TaskForm from "./components/TaskForm.js";
+import TaskList from "./components/TaskList.js";
 
 function App() {
-  const [count, setCount] = useState(0)
+  interface Task {
+    id: number;
+    text: string;
+    category: string;
+    time: string;
+    deactive: boolean;
+  }
+
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+
+  const addTask = (newTask: Task) => {
+    setTasks([...tasks, newTask]);
+  };
+
+  const updateTask = (updatedTask: Task) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === updatedTask.id ? updatedTask : task
+    );
+    setTasks(updatedTasks);
+  };
+
+  const removeTask = (taskId: number) => {
+    const filteredTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(filteredTasks);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container">
+      <h1>📝 To-Do List</h1>
+      <TaskForm
+        addTask={addTask}
+        editingTask={editingTask}
+        setEditingTask={setEditingTask}
+        updateTask={updateTask}
+      />
+      <TaskList
+        tasks={tasks}
+        removeTask={removeTask}
+        setEditingTask={setEditingTask}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;

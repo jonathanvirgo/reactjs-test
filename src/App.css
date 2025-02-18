@@ -1,42 +1,156 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* RESET: Loại bỏ các margin/padding mặc định */
+body, h1, ul, li, input, select, button {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f9fc; /* Màu nền nhã nhặn */
+  color: #333; /* Màu chữ tối */
+  min-height: 100vh; /* Đảm bảo chiều cao bao phủ toàn màn hình */
+}
+
+/* Toàn bộ ứng dụng được căn giữa và gom gọn */
+.container {
+  max-width: 600px; /* Đặt chiều rộng tối đa */
+  margin: 50px auto; /* Căn giữa dọc và ngang */
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+  border-radius: 8px; /* Bo góc mềm mại */
+  padding: 20px; /* Khoảng cách đều trong container */
+}
+
+/* Tiêu đề  */
+h1 {
+  font-size: 24px;
+  color: #0056b3; /* Màu xanh tươi tắn */
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Phần đầu vào (Form thêm công việc) */
+.task-form {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.task-form input[type="text"],
+.task-form select,
+.task-form input[type="time"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.task-form button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.task-form button:hover {
+  background-color: #003d7a; /* Tối màu hơn khi hover */
+}
+
+/* Nút Hủy */
+.task-form button:nth-child(2) {
+  background-color: #e63946;
+}
+
+.task-form button:nth-child(2):hover {
+  background-color: #b32430;
+}
+
+/* Danh sách công việc */
+.task-list {
+  list-style: none; /* Loại bỏ chấm đầu dòng */
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between; /* Các phần tử cách đều nhau */
+  align-items: center; /* Căn giữa dọc */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  transition: all 0.3s;
+}
+
+.task-item:hover {
+  background-color: #eaf1ff; /* Màu nền nhẹ hơn khi hover */
+}
+
+/* Văn bản công việc */
+.task-item div {
+  flex: 1; /* Chiếm toàn bộ không gian trống */
+}
+
+.task-item strong {
+  font-size: 16px;
+}
+
+.task-item p {
+  font-size: 12px;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* Nút sửa và xóa */
+.task-item button {
+  background-color: transparent;
+  border: none;
+  color: #0056b3;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.task-item button:hover {
+  color: #e63946; /* Đổi màu thành đỏ khi hover */
+}
+
+.task-item.active {
+  border: 1px solid #28a745; /* Màu xanh lá */
+  background-color: #e9fce9;
+}
+
+.task-item.inactive {
+  border: 1px solid #e63946; /* Màu đỏ */
+  background-color: #ffe9e9;
+}
+
+.task-item.active:hover {
+  background-color: #d3f7d3; /* Màu nền nhẹ hơn khi hover */
+}
+
+.task-item.inactive:hover {
+  background-color: #ffd6d6; /* Màu nền nhẹ hơn khi hover */
+}
+
+@media (max-width: 768px) { /* Màn hình nhỏ hơn 768px */
+  .container {
+    max-width: 90%; /* Chiếm 90% màn hình */
+    margin-bottom: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .task-item {
+    flex-direction: column; /* Xếp chồng */
+    align-items: flex-start;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .task-item button {
+    margin: 5px 0; /* Tách các nút trên màn hình nhỏ */
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
