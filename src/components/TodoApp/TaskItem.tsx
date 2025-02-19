@@ -1,4 +1,4 @@
-import { Task } from "../types/task"; // Import interface Task
+import { Task } from "../../types/task"; // Import interface Task
 
 interface TaskItemProps {
   task: Task;

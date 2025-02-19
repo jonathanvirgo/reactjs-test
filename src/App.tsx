@@ -1,50 +1,18 @@
-import { useState } from "react";
-import "./App.css";
-import TaskForm from "./components/TaskForm.js";
-import TaskList from "./components/TaskList.js";
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import TodoApp from "./components/TodoApp/TodoApp";
+import WeatherApp from "./components/WeatherApp/WeatherApp";
 
 function App() {
-  interface Task {
-    id: number;
-    text: string;
-    category: string;
-    time: string;
-    deactive: boolean;
-  }
-
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
-
-  const addTask = (newTask: Task) => {
-    setTasks([...tasks, newTask]);
-  };
-
-  const updateTask = (updatedTask: Task) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === updatedTask.id ? updatedTask : task
-    );
-    setTasks(updatedTasks);
-  };
-
-  const removeTask = (taskId: number) => {
-    const filteredTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(filteredTasks);
-  };
+  const [activeApp, setActiveApp] = useState("todo");
 
   return (
-    <div className="container">
-      <h1>📝 To-Do List</h1>
-      <TaskForm
-        addTask={addTask}
-        editingTask={editingTask}
-        setEditingTask={setEditingTask}
-        updateTask={updateTask}
-      />
-      <TaskList
-        tasks={tasks}
-        removeTask={removeTask}
-        setEditingTask={setEditingTask}
-      />
+    <div>
+      <Navbar activeApp={activeApp} setActiveApp={setActiveApp} />
+      <div className="app-content">
+        {activeApp === "todo" && <TodoApp />}
+        {activeApp === "weather" && <WeatherApp />}
+      </div>
     </div>
   );
 }

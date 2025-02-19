@@ -7,7 +7,7 @@ interface TaskFormProps {
   setEditingTask: (task: any) => void;
 }
 
-function TaskForm({
+function TodoApp({
   addTask,
   editingTask,
   updateTask,
@@ -100,4 +100,4 @@ function TaskForm({
   );
 }
 
-export default TaskForm;
+export default TodoApp;
